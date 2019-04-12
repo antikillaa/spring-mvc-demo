@@ -1,4 +1,4 @@
-package by.peshkur.mvc.springboot.controllers;
+package by.peshkur.mvc.springboot.helloworld.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,12 +13,12 @@ public class HelloWorldController {
 
     @RequestMapping("/showForm")
     public String showForm() {
-        return "helloworld-form";
+        return "hello/helloworld-form";
     }
 
     @RequestMapping("/processForm")
     public String processForm() {
-        return "helloworld";
+        return "hello/helloworld";
     }
 
 
@@ -32,7 +32,7 @@ public class HelloWorldController {
         //add message to model
         model.addAttribute("message", result);
 
-        return "helloworld";
+        return "hello/helloworld";
     }
 
     @RequestMapping("/processFormVersionThree")
@@ -47,7 +47,7 @@ public class HelloWorldController {
         //add message to model
         model.addAttribute("message", result);
 
-        return "helloworld";
+        return "hello/helloworld";
     }
 
 }
