@@ -12,8 +12,8 @@ public class StudentController {
 
     @RequestMapping("/showForm")
     public String showForm(Model model) {
-        Student theStudent = new Student();
-        model.addAttribute("student", theStudent);
+        Student student = new Student();
+        model.addAttribute("student", student);
 
         return "student/student-form";
     }
@@ -27,5 +27,4 @@ public class StudentController {
 
         return "student/student-confirmation";
     }
-
 }
