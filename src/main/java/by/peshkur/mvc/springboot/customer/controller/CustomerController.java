@@ -1,10 +1,16 @@
 package by.peshkur.mvc.springboot.customer.controller;
 
 import by.peshkur.mvc.springboot.customer.model.Customer;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/customer")
@@ -12,16 +18,28 @@ public class CustomerController {
 
     @RequestMapping("/showForm")
     public String showForm(Model model) {
-        Customer customer = new Customer();
-
         model.addAttribute("customer", new Customer());
 
         return "customer/customer-form";
     }
 
     @RequestMapping("processForm")
-    public String processForm(@ModelAttribute("customer") Customer customer) {
+    public String processForm(
+            @Valid @ModelAttribute("customer") Customer customer,
+            BindingResult bindingResult) {
 
+        System.out.println("Last name: |" + customer.getLastName() + "|");
+        if (bindingResult.hasErrors()) {
+            return "customer/customer-form";
+        } else {
+            return "customer/customer-confirmation";
+        }
+    }
 
+    //remove whitespaces in input fields
+    @InitBinder
+    public void initBinder(WebDataBinder webDataBinder) {
+        StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+        webDataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
     }
 }
