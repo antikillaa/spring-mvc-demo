@@ -13,10 +13,8 @@ public class Customer {
     private String lastName;
 
     @Min(value = 0, message = "must be greater than or or equal to zero")
-    @Max(value = 10, message = "must be greater than or or equal to zero")
-
+    @Max(value = 10, message = "must be less than or or equal to 10")
     private int freePasses;
-
 
     public Customer() {
     }
@@ -35,5 +33,13 @@ public class Customer {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public int getFreePasses() {
+        return freePasses;
+    }
+
+    public void setFreePasses(int freePasses) {
+        this.freePasses = freePasses;
     }
 }
